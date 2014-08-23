@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Dott by avdgaag</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Dott</h1>
+        <p class="header">Simple shell script to update and symlink dotfiles</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/avdgaag/dott/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/avdgaag/dott/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/avdgaag/dott">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/avdgaag">avdgaag</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="dott----simple-dotfiles-management" class="anchor" href="#dott----simple-dotfiles-management"><span class="octicon octicon-link"></span></a>Dott -- simple dotfiles management</h1>
+
+<p>Dott is a simple shell script I wrote to manage <a href="https://github.com/avdgaag/dotfiles">my dotfiles</a>. It handles the
+updating and symlinking into <code>$HOME</code> of all my dotfiles, kept in a Git
+repository.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>To install dott, simply put the <code>dott</code> file somewhere in your <code>$PATH</code> and make it
+executable. One way to do so would be:</p>
+
+<pre><code>% curl https://raw.githubusercontent.com/avdgaag/dott/master/dott &gt; /usr/local/bin/dott
+% chmod +x /usr/local/bin/dott
+</code></pre>
+
+<p>You can test if everything works alright by running <code>dott --version</code>. You should
+see something along these lines:</p>
+
+<pre><code>% dott --version
+0.1.0
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Here is the help contents displayed when you run <code>dott --help</code>:</p>
+
+<pre><code>Usage: dott [subcommand] [options]
+
+Available subcommands:
+
+  clone          Install dotfiles from a Git repository into ~/.dotfiles
+  update         Fetch new commits from the remote repository and optionally
+                 update subtree-merged remote repositories.
+  link           Symlink all the files in the dotfiles directory into the
+                 home directory.
+  unlink         Remove symlinks to files in the dotfiles directory from
+                 the home directory.
+
+Options for update:
+
+  -s, --subtrees Also fetch new commits for merged subtrees and squash them
+                 into the local repository. This reads subtree directories
+                 and repositories from ~/.dotfiles/.gitsubtrees.
+
+Options for link:
+
+  -f, --force    Overwrite files even if they already exist.
+  -p, --pretend  Display results but don't actually change anything
+
+Options for unlink:
+
+  -p, --pretend  Display results but don't actually change anything
+
+Generic options:
+
+  -v, --version  Show version information
+  -h, --help     Show this message
+</code></pre>
+
+<p>A normal workflow would be to first install your personal dotfiles from a Git
+repository in your local home directory:</p>
+
+<pre><code>% dott clone git@github.com:avdgaag/dotfiles.git
+</code></pre>
+
+<p>This will clone the repository into <code>~/.dotfiles</code>.</p>
+
+<p>Then, symlink all the files from <code>~/.dotfiles/home</code> into <code>$HOME</code>:</p>
+
+<pre><code>% dott link
+</code></pre>
+
+<p>To overwrite any existing files, use the <code>--force</code> flag:</p>
+
+<pre><code>% dott link --force
+</code></pre>
+
+<p>To clean up again, remove all your symlinks using <code>unlink</code>:</p>
+
+<pre><code>% dott unlink
+</code></pre>
+
+<p>To update your <code>~/.dotfiles</code> directory from its remote repository,
+use <code>dott update</code>:</p>
+
+<pre><code>% dott update
+</code></pre>
+
+<p>My personal dotfiles repo has a list of other repositories merged into it using
+a Git subtree merge. Dott can update these repositories automatically by adding
+the <code>--subtrees</code> flag to <code>dott update</code>:</p>
+
+<pre><code>% dott update --subtrees
+</code></pre>
+
+<h2>
+<a name="credits-and-links" class="anchor" href="#credits-and-links"><span class="octicon octicon-link"></span></a>Credits and links</h2>
+
+<p><strong>Author</strong>: Arjan van der Gaag <a href="mailto:arjan@arjanvandergaag.nl">arjan@arjanvandergaag.nl</a>
+<strong>Date</strong>: August 2014
+<strong>Website</strong>: <a href="http://avdgaag.github.io/dott">http://avdgaag.github.io/dott</a>
+<strong>Issues</strong> <a href="https://github.com/avdgaag/dott/issues">https://github.com/avdgaag/dott/issues</a>
+<strong>Source</strong> <a href="https://github.com/avdgaag/dott">https://github.com/avdgaag/dott</a>
+<strong>Changelog</strong> See CHANGELOG.md</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Dott is released under the MIT license (see LICENSE).</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-20357800-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
