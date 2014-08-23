@@ -193,10 +193,10 @@ link() {
       if [[ -z $FORCE ]]
       then
         echo_green_label 'Link   ' $file
-        [[ -z $PRETEND ]] && ln -s $file $target
+        [[ -z $PRETEND ]] && ln -sn $file $target
       else
         echo_red_label 'Force  ' $file
-        [[ -z $PRETEND ]] && ln -sf $file $target
+        [[ -z $PRETEND ]] && ln -snFf $file $target
       fi
     fi
   done
