@@ -86,11 +86,11 @@ the `--subtrees` flag to `dott update`:
 
 ## Credits and links
 
-**Author**: Arjan van der Gaag <arjan@arjanvandergaag.nl>
-**Date**: August 2014
-**Website**: http://avdgaag.github.io/dott
-**Issues** https://github.com/avdgaag/dott/issues
-**Source** https://github.com/avdgaag/dott
+**Author**: Arjan van der Gaag <arjan@arjanvandergaag.nl>  
+**Date**: August 2014  
+**Website**: http://avdgaag.github.io/dott  
+**Issues** https://github.com/avdgaag/dott/issues  
+**Source** https://github.com/avdgaag/dott  
 **Changelog** See CHANGELOG.md
 
 ## License
