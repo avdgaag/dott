@@ -11,6 +11,8 @@
 #                  home directory.
 #   unlink         Remove symlinks to files in the dotfiles directory from
 #                  the home directory.
+#   import         Take the name of a dotfile in $HOME, copy it to ~/.dotfiles
+#                  and symlink it back into $HOME.
 #
 # Options for update:
 # 
@@ -220,8 +222,32 @@ clone() {
   git clone "$url" "$DOTFILES_ROOT" 2>&1 | indent_output
 }
 
+import() {
+  local readonly file=$1
+  if [[ -z "$file" ]] 
+  then
+    echo_error 'No file to import specified.'
+    exit 1
+  fi
+
+  if [[ ! -f "$HOME/$file" ]]
+  then
+    echo_error "No such file $HOME/$file"
+    exit 1
+  fi
+
+  if [[ -L "$HOME/$file" ]]
+  then
+    echo_error "File $HOME/$file is already a symlink"
+    exit 1
+  fi
+
+  mv "$HOME/$file" "$DOTFILES_DIR/$file"
+  ln -sn "$DOTFILES_DIR/$file" "$HOME/$file"
+}
+
 help() {
-  sed 's/^# \{0,1\}//' $PROGRAM_NAME | sed -n '3,33p'
+  sed 's/^# \{0,1\}//' $PROGRAM_NAME | sed -n '3,35p'
   exit 0
 }
 
@@ -239,6 +265,7 @@ main() {
     update)       update "$@";;
     link)         link "$@";;
     unlink)       unlink "$@";;
+    import)       import "$@";;
     --version|-v) version;;
     *)            help;;
   esac
