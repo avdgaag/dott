@@ -37,7 +37,6 @@
 
 set -e
 
-readonly PROGRAM_NAME=$(basename $0)
 readonly ARGS="$@"
 readonly VERSION='0.2.0'
 readonly DOTFILES_ROOT="$HOME/.dotfiles"
@@ -247,7 +246,7 @@ import() {
 }
 
 help() {
-  sed 's/^# \{0,1\}//' $PROGRAM_NAME | sed -n '3,35p'
+  sed 's/^# \{0,1\}//' $0 | sed -n '3,35p'
   exit 0
 }
 
